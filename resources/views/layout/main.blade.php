@@ -114,7 +114,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('logout') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Logout
@@ -163,7 +163,6 @@
 <script src="{{ asset('LTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- Summernote -->
 <script src="{{ asset('LTE/plugins/summernote/summernote-bs4.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{  asset('LTE/dist/js/adminlte.js') }}"></script>
+
 </body>
 </html>

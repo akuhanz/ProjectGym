@@ -30,7 +30,11 @@ class LoginController extends Controller
 
        if( Auth::attempt($data)){
         session(['authenticated' => true]);
-        return redirect()->route('dashboard');
+        if (Auth::user()->role == 'user'){
+            return redirect('dashboard');
+        }elseif(Auth::user()->role == 'admin'){
+            return redirect('dashboardadmin');
+        }
        }else{
         return redirect()->route('login')->with('failed', 'Email atau Password anda salah');
        }
@@ -49,12 +53,12 @@ class LoginController extends Controller
 
     public function register_proses(Request $request){
         $request->validate([
-            'Username'      => 'required',
+            'name'      => 'required',
             'email'         => 'required|email|unique:users,email',
             'password'      => 'required|min:6'
         ]);
 
-        $data['Username']       = $request->Username;
+        $data['name']           = $request->name;
         $data['email']          = $request->email;
         $data['password']       = Hash::make($request->password);
 
@@ -66,6 +70,7 @@ class LoginController extends Controller
         ];
 
        if( Auth::attempt($login)){
+        session(['authenticated' => true]);
             return redirect()->route('dashboard');
        }
     }

@@ -29,8 +29,8 @@
                         <div class="input-box">
                             <header>SIGN UP</header>
                             <div class="input-field">
-                                <input type="text" class="input" name="Username" id="Username" required autocomplete="username">
-                                <label for="Username">username</label>
+                                <input type="text" class="input" name="name" id="name" required autocomplete="name">
+                                <label for="name">username</label>
                             </div>
                             <div class="input-field">
                                 <input type="text" class="input" name="email" id="email" required autocomplete="email">
