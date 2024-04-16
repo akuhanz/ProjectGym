@@ -47,7 +47,7 @@
                                       <td>{{$produk->deskripsiproduk}}</td>
                                       <td style="width: 50px">{{$produk->stok}}</td>
                                       <td style="width: 100px">{{$produk->harga}}</td>
-                                      <td>{{$produk->gambar}}</td>
+                                      <td> <img src="{{ asset('storage/produk/'.$produk->gambar) }}"  style="height: 70px; alt="..."></td>
                                       <td style="width: 180px">
                                           <a data-toggle="modal" data-target="#modal-edit{{$produk->id}}"
                                               class="btn btn-primary"><i class="fas fa-pen"></i>edit</a>

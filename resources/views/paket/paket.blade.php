@@ -46,7 +46,7 @@
                                                 <td>{{$p->Paket}}</td>
                                                 <td>{{$p->deskripsipaket}}</td>
                                                 <td>{{$p->harga}}</td>
-                                                <td>{{$p->gambar}}</td>
+                                                <td>  <img src="{{ asset('storage/images/'.$p->gambar) }}" style="width: 100px" alt="..."></td>
                                                 <td>
                                                     <a data-toggle="modal" data-target="#modal-edit{{$p->id}}" class="btn btn-primary"><i class="fas fa-pen"></i>edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{$p->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i>hapus</a>

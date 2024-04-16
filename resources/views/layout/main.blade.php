@@ -163,6 +163,7 @@
 <script src="{{ asset('LTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- Summernote -->
 <script src="{{ asset('LTE/plugins/summernote/summernote-bs4.min.js') }}"></script>
-
+<!-- AdminLTE App -->
+<script src="{{  asset('LTE/dist/js/adminlte.js') }}"></script>
 </body>
 </html>
