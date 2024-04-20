@@ -27,4 +27,8 @@ class HomeController extends Controller
 
         return view('produkgym', compact('data'));
     }
+
+    public function aboutgym(){
+        return view('aboutgym');
+    }
 }

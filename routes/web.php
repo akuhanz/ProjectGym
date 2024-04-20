@@ -37,6 +37,7 @@ Route::middleware(['guest'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/paketgym', [HomeController::class,'paketgym'])->name('paketgym');
     Route::get('/produkgym', [HomeController::class,'produkgym'])->name('produkgym');
+    Route::get('/aboutgym', [HomeController::class, 'aboutgym'])->name('aboutgym');
     
     
     // Dashboard ADMIN 

@@ -29,7 +29,7 @@
                   <a class="nav-link mx-lg-2 active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link mx-lg-2" href="#">about</a>
+                  <a class="nav-link mx-lg-2" href="{{ route('aboutgym') }}">about</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-lg-2" href="{{ route('paketgym') }}">Daftar Paket</a>
