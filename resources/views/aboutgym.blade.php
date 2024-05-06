@@ -28,7 +28,7 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link mx-lg-2 active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link mx-lg-2 active" aria-current="page" href="{{ route('dashboard') }}">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link mx-lg-2" href="{{ route('aboutgym') }}">about</a>
@@ -62,7 +62,7 @@
     <div class="slider">
         <div class="list">
             <div class="item active">
-                <img src="{{ asset('storage/images/slide1.png') }}" alt="">
+                <img src="{{ asset('storage/images/fas1.jpg') }}" alt="">
                 <div class="content">
                     <p>Design</p>
                     <h2>Slider 01</h2>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="{{ asset('storage/images/slide2.png') }}" alt="">
+                <img src="{{ asset('storage/images/fas2.jpg') }}" alt="">
                 <div class="content">
                     <p>Design</p>
                     <h2>Slider 02</h2>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="https://images.pexels.com/photos/5498976/pexels-photo-5498976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <img src="{{ asset('storage/images/fas3.jpg') }}" alt="">
                 <div class="content">
                     <p>Design</p>
                     <h2>Slider 03</h2>
@@ -101,19 +101,19 @@
 
         <div class="thumbnail">
             <div class="item active">
-                <img src="{{ asset('storage/images/slide1.png') }}" alt="">
+                <img src="{{ asset('storage/images/fas1.jpg') }}" alt="">
                 <div class="content">
                     Name Slider
                 </div>
             </div>
             <div class="item">
-                <img src="{{ asset('storage/images/slide2.png') }}" alt="">
+                <img src="{{ asset('storage/images/fas2.jpg') }}" alt="">
                 <div class="content">
                     Name Slider
                 </div>
             </div>
             <div class="item">
-                <img src="https://images.pexels.com/photos/5498976/pexels-photo-5498976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <img src="{{ asset('storage/images/fas3.jpg') }}" alt="">
                 <div class="content">
                     Name Slider
                 </div>

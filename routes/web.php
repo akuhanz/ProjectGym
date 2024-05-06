@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/paketgym', [HomeController::class,'paketgym'])->name('paketgym');
     Route::get('/produkgym', [HomeController::class,'produkgym'])->name('produkgym');
     Route::get('/aboutgym', [HomeController::class, 'aboutgym'])->name('aboutgym');
-    
+    Route::get('/transaksi/{id}',[HomeController::class,'transaksi'])->name('transaksi');
     
     // Dashboard ADMIN 
     Route::get('/dashboardadmin',[HomeAdminController::class,'dashboardadmin'])->name('dashboardadmin')->middleware('userAkses:admin');
@@ -73,10 +73,6 @@ Route::get('/home', function(){
 Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 //Auth Login Admin
 Route::get('/adminlogin',[LoginController::class,'admin'])->name('admin');
-
-
-
-Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 
 

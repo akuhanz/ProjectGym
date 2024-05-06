@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\tblpaket;
 use App\Models\tblproduk;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,5 +29,12 @@ class HomeController extends Controller
 
     public function aboutgym(){
         return view('aboutgym');
+    }
+
+    public function transaksi(Request $request, $id){
+        
+        $data = tblproduk::find($id);
+
+        return view('transaksi', compact('data'));
     }
 }

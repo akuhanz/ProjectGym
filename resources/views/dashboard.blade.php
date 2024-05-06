@@ -58,7 +58,7 @@
 
     <section class="hero-section">
         <div class="container d-flex align-items-center justify-content-center fs-1 text-white flex-column">
-            <h1>Welcome To The Hell</h1>
+            <h1>Welcome To Gym</h1>
             <h2>My Costumers</h2>
         </div>
     </section>

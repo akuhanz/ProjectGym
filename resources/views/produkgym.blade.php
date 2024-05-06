@@ -10,7 +10,7 @@
                     <h5 class="card-title">{{$produk->nameproduk}}</h5>
                     <hr>
                     <h4 class="card-text" style="font-weight: bold;">Rp. {{ $produk->harga}}</h4>
-                    <a href="#" class="btn btn-primary">Pesan</a>
+                    <a href="{{route('transaksi',['id' => $produk->id])}}" class="btn btn-primary">Pesan</a>
                 </div>
             </div>
         </div>

@@ -126,7 +126,7 @@ span a:hover{
 }
 @media only screen and (max-width: 768px){
     .side-image{
-        border-radius: 0 0 10px 10px;
+        border-radius: 10px 10px 0 0;
     }
     image{
         width: 35px;

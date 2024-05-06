@@ -6,6 +6,7 @@ use App\Models\tblpaket;
 use App\Models\tblproduk;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,21 @@ class HomeAdminController extends Controller
 {
 
     public function dashboardadmin(){
-        return view('dashboardadmin');
+        // Mengambil jumlah data dari model pertama (contoh: User)
+        $jumlahPaket = tblpaket::count();
+    
+        // Mengambil jumlah data dari model kedua (contoh: Post)
+        $jumlahProduk = tblproduk::count();
+
+        $username = Auth::user()->name;
+    
+        // Meneruskan kedua variabel tersebut ke view 'dashboardadmin'
+        return view('dashboardadmin', [
+            'jumlahPaket' => $jumlahPaket,
+            'jumlahProduk' => $jumlahProduk,
+            'username' => $username
+            
+        ]);
     }
     
     public function paket(){

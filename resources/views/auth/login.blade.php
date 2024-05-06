@@ -17,6 +17,12 @@
     <div class="wrapper">
         <div class="container main">
             <div class="row">
+                <div class="col-md-6 side-image">
+                    <img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="image">
+                    <div class="text">
+                        <p>Selamat datang! silahkan Masuk atau daftar untuk memulai GYM anda.</p>
+                    </div>
+                </div>
                 <div class="col-md-6 left">
                     <form method="POST" action="{{ route('login-proses')}}">
                         @csrf
@@ -46,12 +52,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6 side-image">
-                    <img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="image">
-                    <div class="text">
-                        <p>Selamat datang! silahkan Masuk atau daftar untuk memulai GYM anda.</p>
-                    </div>
-                </div>
+                
                 
             </div>
         </div>
