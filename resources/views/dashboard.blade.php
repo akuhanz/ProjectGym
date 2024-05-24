@@ -50,9 +50,9 @@
                               </li>
                           @endif
                         @endauth
-                        <li class="group">
+                        <li class="group mt-2">
                             @if(session('authenticated'))
-                            <a href="{{ route('logout') }}" class="py-2 px-5 mx-5 my-3 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Logout</a>
+                            <a href="{{ route('logout') }}" class="py-2 px-5 mx-5 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Logout</a>
                             @else
                                 <a href="{{ route('login') }}" class="login-bottom">Login</a>
                             @endif

@@ -59,7 +59,7 @@
                             <a href="{{ route('dashboardadmin')}}"  id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Admin</a>
                         </li>
                         @endif
-                        <li class="group">
+                        <li class="group mt-2">
                             <a href="{{ route('logout') }}" class="py-2 px-3 mx-5 my-2 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Logout</a>
                         </li>
                     </ul>

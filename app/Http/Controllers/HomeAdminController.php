@@ -9,6 +9,7 @@ use App\Models\transaction;
 use App\Models\transactionPaket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -253,6 +254,14 @@ class HomeAdminController extends Controller
 
         $data = transaction::paginate(5);
         $datap = transactionPaket::paginate(5);
+
+        if ($data->total() > 6) {
+            Paginator::useBootstrap();
+        }
+
+        if ($datap->total() > 6) {
+            Paginator::useBootstrap();
+        }
     
         return view('penjualan.kelolapenjualan', compact('data', 'datap'));
     }
