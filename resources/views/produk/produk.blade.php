@@ -29,7 +29,7 @@
                           <table class="table table-hover fs-5" style="text-align: justify;">
                               <thead>
                                   <tr>
-                                      <th>No</th>
+                                      <th>Kode</th>
                                       <th>produk</th>
                                       <th>Deskripsi</th>
                                       <th>stok</th>
@@ -42,7 +42,7 @@
                                   @foreach ($data as $produk)
                             
                                   <tr>
-                                      <td>{{ $loop->iteration}}</td>
+                                      <td style="width: 100px">{{$produk->idProduk}}</td>
                                       <td>{{$produk->nameproduk}}</td>
                                       <td>{{$produk->deskripsiproduk}}</td>
                                       <td style="width: 50px">{{$produk->stok}}</td>

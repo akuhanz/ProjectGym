@@ -18,6 +18,7 @@ class tblproduk extends Model
      protected $table = 'tblproduk'; // Sesuaikan dengan nama tabel yang sebenarnya
 
     protected $fillable = [
+        'idProduk',
         'nameproduk',
         'stok',
         'deskripsiproduk',

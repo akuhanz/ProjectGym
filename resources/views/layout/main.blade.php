@@ -105,6 +105,12 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <a href="{{route('dashboard')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Halaman Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('paket')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Daftar Paket</p>
@@ -116,6 +122,14 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Daftar Produk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('kelolapenjualan')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Kelola Penjualan
               </p>
             </a>
           </li>

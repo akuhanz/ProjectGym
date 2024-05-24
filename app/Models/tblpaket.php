@@ -18,6 +18,7 @@ class tblpaket extends Model
      protected $table = 'tblpaket'; // Sesuaikan dengan nama tabel yang sebenarnya
 
     protected $fillable = [
+        'idpaket',
         'Paket',
         'deskripsipaket',
         'harga',

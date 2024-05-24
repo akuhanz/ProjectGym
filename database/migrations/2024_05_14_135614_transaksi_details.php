@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Transaction', function (Blueprint $table) {
+        Schema::create('transactionDetails', function (Blueprint $table) {
             $table->id();
             $table->text('idTransaksi');
-            $table->text('idpaket');
-            $table->string('gambar');
-            $table->string('Paket');
             $table->string('name');
-            $table->string('number');
+            $table->text('idProduk');
+            $table->string('gambar');
+            $table->string('nameproduk', 200);
+            $table->integer('jumlah')->unsigned();
             $table->decimal('harga', 10, 2);
             $table->string('metode');
-            $table->timestamp('transaction_date')->useCurrent();
+            $table->string('alamat', 255);
             $table->timestamps();
 
-            // $table->foreign('idUsers')->references('idUsers')->on('users')->onUpdate('cascade')->onDelete('cascade');
+              //relation untuk idProduk di table tb_produk
+            // $table->foreign('idProduk')->references('idProduk')->on('tblproduk')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TblTransaksi');
+        //
     }
 };

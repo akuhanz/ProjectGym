@@ -1,20 +1,22 @@
-@extends('layout.mains')
+@extends('layout.tailwind')
 @section('content')
     
-<div class="d-flex " style="margin-top: 35px">
+<div class="flex mt-20 flex-wrap h-full">
     {{-- Bagian data paket gym --}}
-    <div class="jojo">
     @foreach ($data as $p)
-        <div class="card" style="width: 30rem; margin-left:20px; margin-bottom: 50px;">
-          <img src="{{ asset('storage/images/'.$p->gambar) }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{$p->Paket}}</h5>
-                <p class="card-text">{{$p->deskripsipaket}}</p>
-                <a href="#" class="btn btn-primary ">Pesan </a>
+    <div class="mx-auto h-full">
+        <div class="bg-white rounded-lg shadow-md mb-4 w-72 sm:mx-4 sm:w-[350px] h-full">
+            <img src="{{ asset('storage/images/'.$p->gambar) }}" class="rounded-t-lg w-full h-52 sm:h-60" alt="...">
+            <div class="mx-3 mt-2">
+                <h5 class="font-bold text-xl uppercase font-sans truncate">{{$p->Paket}}</h5>
+                <p class="font-semibold text-sm text-justify">{{$p->deskripsipaket}}</p>
+            </div>
+            <div class="mx-auto mt-auto">
+                <a href="#" class="inline-block text-center font-medium text-sm text-white bg-emerald-600 w-full rounded-b-lg hover:opacity-80 px-4 py-2 uppercase no-underline">Pesan</a>
             </div>
         </div>
-    @endforeach
     </div>
+    @endforeach
 </div>
 
 @endsection

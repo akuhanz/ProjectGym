@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="produk">produk</label>
-                                        <input type="text" name="produk" value="{{ $data->nameproduk}}" class="form-control" id="produk" placeholder="Enter produk">
+                                        <input type="text" name="nameproduk" value="{{ $data->nameproduk}}" class="form-control" id="produk" placeholder="Enter produk">
                                         @Error('produk')
                                         <small>{{ $message}}</small>
                                         @enderror
@@ -70,7 +70,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                             <!-- /.card -->

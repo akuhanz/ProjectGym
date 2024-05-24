@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,9 @@ class LoginController extends Controller
             'password'      => 'required|min:6'
         ]);
 
+        $idUsers = Helper::IDGenerator(new User, 'idUsers', 4,'Hoyo');
+
+        $data['idUsers']        = $idUsers;
         $data['name']           = $request->name;
         $data['email']          = $request->email;
         $data['password']       = Hash::make($request->password);

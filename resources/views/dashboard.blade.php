@@ -6,67 +6,146 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard By rehanz</title>
 
-    {{-- BOOTSTRAP CSS --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+     {{-- TailwindCSS --}}
+     @vite('resources/css/app.css')
 
+     <link rel="stylesheet" href="{{ asset('LTE/dist/icon/css/all.min.css')}}">
+
+   
     {{-- Link file CSS --}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
-    {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand me-auto" href="#"><img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="" style="width: 35px; border-radius: 50%;"></a>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="" style="width: 35px; border-radius: 50%;"></h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <header class="navbar-fixed -top-1 left-0 w-full flex items-center">
+    <div class="container">
+        <div class="flex items-center justify-between relative">
+            <div class="px-4">
+                <a href="#home" class="font-bold text-lg text-primary block py-6">hanzyozakura</a>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link mx-lg-2 active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link mx-lg-2" href="{{ route('aboutgym') }}">about</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-lg-2" href="{{ route('paketgym') }}">Daftar Paket</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link mx-lg-2" href="{{ route('produkgym') }}">Produk Gym</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link mx-lg-2" href="#">contact</a>
-                  </li>
-              </ul> 
+            
+            <div class="flex items-center px-4">
+                <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+                </button>
+                
+                <nav id="nav-menu" class="hidden absolute py-5 z-10 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
+                    <ul class="block lg:flex ">
+                        <li class="group">
+                            <a href="{{ route('dashboard') }}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex  group-hover:text-primary ">Beranda</a>
+                        </li>
+                        <li class="group">
+                            <a href="{{ route('riwayattransaction') }}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Transaction</a>
+                        </li>
+                        <li class="group">
+                            <a href="{{ route('shop') }}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Shop</a>
+                        </li>
+                        
+                        @auth
+                          @if(Auth::user()->role === 'admin')
+                              <li class="group">
+                                  <a href="{{ route('dashboardadmin')}}"  id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Admin</a>
+                              </li>
+                          @endif
+                        @endauth
+                        <li class="group">
+                            @if(session('authenticated'))
+                            <a href="{{ route('logout') }}" class="py-2 px-5 mx-5 my-3 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Logout</a>
+                            @else
+                                <a href="{{ route('login') }}" class="login-bottom">Login</a>
+                            @endif
+                        </li>
+                    </ul>
+                </nav>
             </div>
-          </div>
-          @if(session('authenticated'))
-          <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
-            @else
-                <a href="{{ route('admin') }}" class="btn btn-warning">Admin</a>
-                <a href="{{ route('login') }}" class="login-bottom">Login</a>
-            @endif
-          <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
         </div>
-      </nav>
-    {{-- End Navbar --}}
+    </div>
+</header> 
 
     <section class="hero-section">
-        <div class="container d-flex align-items-center justify-content-center fs-1 text-white flex-column">
-            <h1>Welcome To Gym</h1>
-            <h2>My Costumers</h2>
+        <div class="container flex items-center justify-center text-white flex-column">
+          <div class=" text-center">
+            <h1 class="font-bold text-3xl sm:text-7xl">Welcome To Gym</h1>
+            <h2 class="font-semibold text-xl sm:text-5xl">My Costumers</h2>
+          </div>
         </div>
     </section>
+
+
+     {{-- Slider --}}
+     <div class="slider">
+        <div class="list">
+            <div class="item active">
+                <img src="{{ asset('storage/images/fas1.jpg') }}" alt="">
+                <div class="content">
+                    <p>Design</p>
+                    <h2>Slider 01</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio id deserunt corrupti eligendi, omnis magni aliquam ea est minus aperiam voluptatem sunt distinctio eaque, amet dolorem corporis, itaque deleniti.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ asset('storage/images/fas2.jpg') }}" alt="">
+                <div class="content">
+                    <p>Design</p>
+                    <h2>Slider 02</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio id deserunt corrupti eligendi, omnis magni aliquam ea est minus aperiam voluptatem sunt distinctio eaque, amet dolorem corporis, itaque deleniti.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ asset('storage/images/fas3.jpg') }}" alt="">
+                <div class="content">
+                    <p>Design</p>
+                    <h2>Slider 03</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio id deserunt corrupti eligendi, omnis magni aliquam ea est minus aperiam voluptatem sunt distinctio eaque, amet dolorem corporis, itaque deleniti.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="https://images.pexels.com/photos/10698437/pexels-photo-10698437.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <div class="content">
+                    <p>Design</p>
+                    <h2>Slider 04</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio id deserunt corrupti eligendi, omnis magni aliquam ea est minus aperiam voluptatem sunt distinctio eaque, amet dolorem corporis, itaque deleniti.</p>
+                </div>
+            </div>
+        </div>
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+
+        <div class="thumbnail">
+            <div class="item active">
+                <img src="{{ asset('storage/images/fas1.jpg') }}" alt="">
+                <div class="content">
+                    Name Slider
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ asset('storage/images/fas2.jpg') }}" alt="">
+                <div class="content">
+                    Name Slider
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ asset('storage/images/fas3.jpg') }}" alt="">
+                <div class="content">
+                    Name Slider
+                </div>
+            </div>
+            <div class="item">
+                <img src="https://images.pexels.com/photos/10698437/pexels-photo-10698437.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <div class="content">
+                    Name Slider
+                </div>
+            </div>
+        </div>
+    </div>
+
   
-
-
-    {{-- Bootstrap script --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <!-- Sertakan file JavaScript -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 </html>

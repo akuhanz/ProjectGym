@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\tblpaket;
 use App\Models\tblproduk;
+use App\Models\transaction;
+use App\Models\transactionPaket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,12 +64,16 @@ class HomeAdminController extends Controller
 
     Storage::disk('public')->put($path,file_get_contents($photo));
 
+    $idPaket =Helper::IDGenerator(new tblpaket(), 'idpaket', 3, 'RRQ');
+
+
     // Buat data untuk disimpan ke database
     $data = [
+        'idpaket' => $idPaket,
         'Paket' => $request->Paket,
         'deskripsipaket' => $request->deskripsipaket,
         'harga' => $request->harga,
-        'gambar' => $path, // Simpan jalur gambar ke database
+        'gambar' => $filename, // Simpan jalur gambar ke database
     ];
 
         tblpaket::create($data);
@@ -80,12 +87,12 @@ class HomeAdminController extends Controller
         return view('paket.edit', compact('data'));
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id) {
         $validator = Validator::make($request->all(),[
             'Paket'             => 'required',
             'deskripsipaket'    => 'required',
             'harga'             => 'required',
-            'gambar'            => 'required|mimes:png,jpg,jpeg|max:2048',
+            'gambar'            => 'nullable|mimes:png,jpg,jpeg|max:2048',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -111,11 +118,16 @@ class HomeAdminController extends Controller
             Storage::disk('public')->put($path,file_get_contents($photo));
 
             $data['gambar']  = $filename;
+        }else {
+            $imageDb = tblpaket::findOrFail($id);
+            $data['gambar'] = $imageDb->gambar;
         }
+
 
         tblpaket::whereId($id)->update($data);
 
         return redirect()->route('paket');
+    
     }
 
     public function paketdelete(Request $request, $id){
@@ -160,8 +172,11 @@ class HomeAdminController extends Controller
 
     Storage::disk('public')->put($path,file_get_contents($photo));
 
+    $idProduk =Helper::IDGenerator(new tblproduk, 'idProduk', 3, 'PRX');
+
     // Buat data untuk disimpan ke database
     $data = [
+        'idProduk'          => $idProduk,
         'nameproduk'        => $request->nameproduk,
         'stok'              => $request->stok,
         'deskripsiproduk'   => $request->deskripsiproduk,
@@ -180,27 +195,26 @@ class HomeAdminController extends Controller
         return view('produk.edit', compact('data'));
     }
 
-    public function produkupdate(Request $request, $id){
+    public function updateproduk(Request $request, $id){
         $validator = Validator::make($request->all(),[
             'nameproduk'                    => 'required',
             'stok'                          => 'required',
             'deskripsiproduk'               => 'required',
             'harga'                         => 'required',
-            'gambar'                        => 'required|mimes:png,jpg,jpeg|max:2048',
+            'gambar'                        => 'nullable|mimes:png,jpg,jpeg|max:2048',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        
         $find = tblproduk::find($id);
 
-        $data['nameproduk'] = $request->nameproduk;
-        $data['stok'] = $request->stok;
-        $data['deskripsiproduk'] = $request->deskripsiproduk;
-        $data['harga'] = $request->harga;
-        $data['gambar'] = $request->gambar;
+        $data['nameproduk']         = $request->nameproduk;
+        $data['stok']               = $request->stok;
+        $data['deskripsiproduk']    = $request->deskripsiproduk;
+        $data['harga']              = $request->harga;
+        $data['gambar']             = $request->gambar;
 
-        $photo      = $request->file('gambar');
+        $photo  = $request->file('gambar');
 
         if($photo){
             $filename   = date('y-m-d').$photo->getClientOriginalName();
@@ -213,11 +227,16 @@ class HomeAdminController extends Controller
             Storage::disk('public')->put($path,file_get_contents($photo));
 
             $data['gambar']  = $filename;
+        }else {
+            $imageDb = tblproduk::findOrFail($id);
+            $data['gambar'] = $imageDb->gambar;
         }
+
 
         tblproduk::whereId($id)->update($data);
 
         return redirect()->route('produk');
+    
     }
 
     public function produkdelete(Request $request, $id){
@@ -230,4 +249,14 @@ class HomeAdminController extends Controller
         return redirect()->route('produk');
     }
 
+    public function kelolapenjualan(){
+
+        $data = transaction::paginate(5);
+        $datap = transactionPaket::paginate(5);
+    
+        return view('penjualan.kelolapenjualan', compact('data', 'datap'));
+    }
+    
+
 }
+

@@ -3,12 +3,18 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./resources?**/*.vue",
+    "./resources/**/*.vue",
   ],
   theme: {
+    container:{
+      center: true,
+      padding: '16px',
+    },
     extend: {
       colors: {
-        primary : '#1111A8'
+      primary: '#8b5cf6',
+      secondary: '#64748b',
+      dark: '#0f172a',
       },
     },
   },
