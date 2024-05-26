@@ -20,6 +20,10 @@ class DataPaket extends Seeder
             'harga' => '350000',
             'gambar' => 'Gym'
         ]);
+
+        // Skipping Rope
+        // Skipping rope adalah alat sederhana namun efektif untuk latihan kardio yang melibatkan loncat tali. Biasanya terbuat dari kawat baja yang dilapisi dengan plastik atau karet untuk daya tahan dan keamanan. Pegangan skipping rope dapat terbuat dari bahan seperti kayu atau plastik dengan grip yang nyaman di tangan.
+        // 20000
         
     }
 }

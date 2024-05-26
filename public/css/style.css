@@ -115,10 +115,15 @@ body{
 }
 .slider .list .item .content p:nth-child(1){
     text-transform: uppercase;
-    letter-spacing: 10px;
+    letter-spacing: 20px;
+}
+.slider .list .item .content p:nth-child(3){
+    text-align: justify;
+    font-size: 10px;
 }
 .slider .list .item .content h2{
-    font-size: 100px;
+    font-weight: bold;  
+    font-size: 40px;
     margin: 0;
 }
 .slider .list .item.active{
@@ -222,6 +227,10 @@ body{
     }
     .hero-section::before{
         height: 107vh;
+    }
+    .slider .list .item .content h2{
+        font-size: 20px;
+        margin: 0;
     }
 }
 
