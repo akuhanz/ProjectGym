@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class HomeAdminController extends Controller
 {
 
+    // Menapilkan Halaman Dashboard Untuk Admin
     public function dashboardadmin(){
         // Mengambil jumlah data dari model pertama (contoh: User)
         $jumlahPaket = tblpaket::count();
@@ -35,6 +36,7 @@ class HomeAdminController extends Controller
         ]);
     }
     
+    // Membuat admin menuju kehalaman kumpulan data paket yang sudah ia bikin
     public function paket(){
 
         $data = tblpaket::get();
@@ -42,10 +44,12 @@ class HomeAdminController extends Controller
         return view('paket.paket', compact('data'));
     }
 
+    // Membuat admin menuju halaman untuk membuat/mengisi paket yang dia ingin kan
     public function create(){
         return view('paket.create');
     }
 
+    //Proses untuk mengirim data paket yang telah ia buat menuju database
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'gambar'            => 'required|mimes:png,jpg,jpeg|max:2048',
@@ -82,12 +86,14 @@ class HomeAdminController extends Controller
         return redirect()->route('paket');
     }
 
+    // Membuat admin menuju halaman untuk mengedit/mengubah isi data paket nya
     public function edit(Request $request,$id){
         $data = tblpaket::find($id);
 
         return view('paket.edit', compact('data'));
     }
 
+    //Proses untuk mengganti data Paket yang lama dengan data Paket yang baru ia edit
     public function update(Request $request, $id) {
         $validator = Validator::make($request->all(),[
             'Paket'             => 'required',
@@ -131,6 +137,7 @@ class HomeAdminController extends Controller
     
     }
 
+    // untuk Menghapus data paket yang sesuai dengan Admin Pilih
     public function paketdelete(Request $request, $id){
         $data = tblpaket::find($id);
 
@@ -141,6 +148,7 @@ class HomeAdminController extends Controller
         return redirect()->route('paket');
     }
 
+    // Membuat admin menuju kehalaman kumpulan data Produk yang sudah ia bikin
     public function produk(){
 
         $data = tblproduk::get();
@@ -148,10 +156,12 @@ class HomeAdminController extends Controller
         return view('produk.produk', compact('data'));
     }
 
+    // Membuat admin menuju halaman untuk membuat/mengisi Produk yang dia ingin kan
     public function produkC(){
         return view('produk.create');
     }
 
+    //Proses untuk mengirim data Produk yang telah ia buat menuju database
     public function produkstore(Request $request){
         $validator = Validator::make($request->all(),[
             'gambar'            => 'required|mimes:png,jpg,jpeg|max:2048',
@@ -190,12 +200,14 @@ class HomeAdminController extends Controller
         return redirect()->route('produk');
     }
 
+    // Membuat admin menuju halaman untuk mengedit/mengubah isi data Produk nya
     public function produkedit(Request $request, $id){
         $data = tblproduk::find($id);
 
         return view('produk.edit', compact('data'));
     }
 
+    //Proses untuk mengganti data Produk yang lama dengan data Produk yang baru ia edit
     public function updateproduk(Request $request, $id){
         $validator = Validator::make($request->all(),[
             'nameproduk'                    => 'required',
@@ -240,6 +252,7 @@ class HomeAdminController extends Controller
     
     }
 
+     // untuk Menghapus data Produk yang sesuai dengan Admin Pilih
     public function produkdelete(Request $request, $id){
         $data = tblproduk::find($id);
 
@@ -250,6 +263,7 @@ class HomeAdminController extends Controller
         return redirect()->route('produk');
     }
 
+    // Membuat Admin menuju kehalaman menampilakan Riwayat Transaksi yang telah para User lakukan
     public function kelolapenjualan(){
 
         $data = transaction::paginate(5);

@@ -34,9 +34,10 @@ img{
     border-radius: 50%;
 }
 .text{
+    width: 70%;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 55%;
+    left: 60%;
     transform: translate(-50%, -50%);
 }
 .text p{
@@ -114,6 +115,24 @@ i{
     font-size: small;
     margin-top: 25px;
 }
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.input-field:focus-within .toggle-password,
+.input:not(:placeholder-shown) + .toggle-password {
+    opacity: 1; /* Show when input is focused or has content */
+}
+
+.toggle-password .fa {
+    font-size: 1.2em;
+}
 span a{
     text-decoration: none;
     font-weight: 700;
@@ -136,10 +155,9 @@ span a:hover{
     }
     .text{
         position: absolute;
-        top: 70%;
     }
     .text p, i{
-        font-size: 17px;
+        font-size: 13px;
     }
     .row{
         max-width: 420px;

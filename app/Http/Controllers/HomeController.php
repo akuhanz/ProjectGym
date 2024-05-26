@@ -15,26 +15,21 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
+    // membuat Pengguna Menuju kehalaman Dashboard
     public function dashboard(){
         return view('dashboard');
     }
 
+    // membuat Pengguna Menuju Shop untuk membeli Paket Atau Produk
     public function shop(){
 
         $data = tblproduk::paginate(8);
         $datap = tblpaket::get();
 
-        foreach ($data as $produk) {
-            $produk->deskripsiproduk = Str::limit($produk->deskripsiproduk, 70);
-        }
-
         return view('shop', compact('data', 'datap'));
     }
 
-    public function aboutgym(){
-        return view('aboutgym');
-    }
-
+    // membuat Pengguna Menuju kehalaman Transaksi sesuai dengan Produk yang di pilih
     public function transaksi(Request $request, $id){
         
         $data = tblproduk::find($id);
@@ -42,6 +37,7 @@ class HomeController extends Controller
         return view('transaksi', compact('data'));
     }
 
+    // membuat Pengguna Menuju kehalaman Transaksi sesuai dengan Paket yang di pilih
     public function transaksipaket(Request $request, $id){
         
         $data = tblpaket::find($id);
@@ -50,6 +46,7 @@ class HomeController extends Controller
     }
 
 
+    // Menampilkan Riwayat Transaksi Produk Sesuai nama Pengguna
     public function riwayattransaction(){
 
 
@@ -58,6 +55,8 @@ class HomeController extends Controller
 
         return view('riwayat', compact('transactionDetails'));
     }
+
+    // Menampilkan Riwayat Transaksi Paket Sesuai nama Pengguna
     public function riwayattransactionpaket(){
 
 
@@ -67,6 +66,7 @@ class HomeController extends Controller
         return view('riwayatpaket', compact('transactionPaket'));
     }
 
+    // Proses melakukan Transaksi Produk
     public function transaksistore(Request $request){
         $validator = Validator::make($request->all(),[
             'metode'                 => 'required',
@@ -94,6 +94,7 @@ class HomeController extends Controller
         return redirect()->route('riwayattransaction');
     }
 
+    // Proses melakukan Transaksi Paket
     public function transaksistorepaket(Request $request){
         $validator = Validator::make($request->all(),[
             'number'                 => 'required',

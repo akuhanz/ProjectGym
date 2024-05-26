@@ -11,6 +11,8 @@
     {{-- link css --}}
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('LTE/dist/icon/css/all.min.css')}}">
+
     <title>Register</title>
 </head>
 <body>
@@ -37,8 +39,11 @@
                                 <label for="email">email</label>
                             </div>
                             <div class="input-field">
-                                <input type="password" class="input" name="password" id="password" required >
+                                <input type="password" class="input" name="password" id="password" required>
                                 <label for="password">password</label>
+                                <span id="togglePassword" class="toggle-password">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </span>
                             </div>
                             <div class="input-field">
                                 <input type="submit" class="submit" name="submit" value="Sign up" >
@@ -52,5 +57,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+       const togglePassword = document.getElementById('togglePassword');
+       const password = document.getElementById('password');
+
+       togglePassword.addEventListener('click', function () {
+           const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+           password.setAttribute('type', type);
+
+           // Toggle the icon
+           this.querySelector('i').classList.toggle('fa-eye');
+           this.querySelector('i').classList.toggle('fa-eye-slash');
+       });
+
+       // Monitor input field to keep the icon visible when it has content
+       password.addEventListener('input', function () {
+           if (password.value.length > 0) {
+               togglePassword.style.opacity = '1';
+           } else {
+               togglePassword.style.opacity = '0';
+           }
+       });
+   });
+   </script>
 </body>
 </html>

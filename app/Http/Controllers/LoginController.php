@@ -11,47 +11,57 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function admin(){
-        return view('auth.admin');
-    }
+    // membuat pengguna( Admin dan User) menuju kehalaman Login
     public function index(){
         return view('auth.login');
     }
 
+    // Proses agar pengguna( Admin dan User) bisa login sesuai dengan email dan password yang sudah ia buat di halaman register
     public function login_proses(Request $request){
-        $request->validate([
-            'email'     => 'required',
-            'password'  => 'required',
-        ]);
+         // Validasi data permintaan
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
 
-        $data = [
-            'email'     => $request->email,
-            'password'  => $request->password
-        ];
+            $email = $request->email;
+            $password = $request->password;
 
-       if( Auth::attempt($data)){
-        session(['authenticated' => true]);
-        if (Auth::user()->role == 'user'){
-            return redirect('dashboard');
-        }elseif(Auth::user()->role == 'admin'){
-            return redirect('dashboardadmin');
+            // Periksa apakah email ada di database
+            $user = User::where('email', $email)->first();
+
+        if ($user) {
+            // Jika emailnya ada, periksa kata sandinya
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                session(['authenticated' => true]);
+    
+                // Pengalihan berdasarkan Role pengguna
+                if (Auth::user()->role == 'user') {
+                    return redirect('dashboard');
+                } elseif (Auth::user()->role == 'admin') {
+                    return redirect('dashboardadmin');
+                }
+            } else {
+                // Jika kata sandi salah
+                return redirect()->route('login')->withErrors([
+                    'password' => 'Password anda salah',
+                ])->withInput();
+            }
+        } else {
+            // Jika email tidak ada, tampilkan kesalahan email dan kata sandi
+            return redirect()->route('login')->withErrors([
+                'email' => 'Email anda salah',
+                'password' => 'Password anda salah',
+            ])->withInput();
         }
-       }else{
-        return redirect()->route('login')->with('failed', 'Email atau Password anda salah');
-       }
-       
     }
 
-    public function logout(){
-        Auth::logout();
-        session()->forget('authenticated');
-        return redirect()->route('login')->with('success', 'Anda berhasil logout');
-    }
-
+    // membuat pengguna menuju kehalaman Register agar bisa membuat akunnya
     public function register(){
         return view('auth.register');
     }
 
+    // Proses agar pengguna membuat Akun sebelum dia login
     public function register_proses(Request $request){
         $request->validate([
             'name'      => 'required',
@@ -77,6 +87,13 @@ class LoginController extends Controller
         session(['authenticated' => true]);
             return redirect()->route('dashboard');
        }
+    }
+
+    // Proses agar Pengguna bisa logout ketika ingin keluar dari akunnya
+    public function logout(){
+        Auth::logout();
+        session()->forget('authenticated');
+        return redirect()->route('login')->with('success', 'Anda berhasil logout');
     }
 
 }
