@@ -31,17 +31,27 @@
                         <div class="input-box">
                             <header>SIGN UP</header>
                             <div class="input-field">
-                                <input type="text" class="input" name="name" id="name" required autocomplete="name">
+                                <input type="text" class="input" name="name" value="{{ old('name') }}" id="name" required autocomplete="name">
                                 <label for="name">username</label>
                             </div>
                             <div class="input-field">
-                                <input type="text" class="input" name="email" id="email" required autocomplete="email">
+                                <input type="text" class="input" name="email" value="{{ old('email') }}" id="email" required autocomplete="email">
                                 <label for="email">email</label>
                             </div>
                             <div class="input-field">
-                                <input type="password" class="input" name="password" id="password" required>
+                                <input type="password" class="input" {{ old('password') }} name="password" id="password" required>
                                 <label for="password">password</label>
                                 <span id="togglePassword" class="toggle-password">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </span>
+                                @error('password')
+                                    <small class="error-message">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="input-field">
+                                <input type="password" class="input" name="password_confirmation" id="password_confirmation" required>
+                                <label for="password">Confirm Password</label>
+                                <span id="toggleConfirmPassword" class="toggle-password">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </span>
                             </div>
@@ -80,6 +90,27 @@
                togglePassword.style.opacity = '0';
            }
        });
+
+       const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPassword = document.getElementById('password_confirmation');
+
+            toggleConfirmPassword.addEventListener('click', function () {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+
+                // Toggle the icon
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+
+            // Monitor input field to keep the icon visible when it has content
+            confirmPassword.addEventListener('input', function () {
+                if (confirmPassword.value.length > 0) {
+                    toggleConfirmPassword.style.opacity = '1';
+                } else {
+                    toggleConfirmPassword.style.opacity = '0';
+                }
+            });
    });
    </script>
 </body>

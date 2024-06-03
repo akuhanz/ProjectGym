@@ -85,10 +85,13 @@
                         <h2 class="ml-4 self-center font-semibold md:text-xl ">Rp. {{ $produk->harga}}</h2>
                     </div>
                     <div class="flex justify-center sm:justify-normal">
-                        <a href="{{route('transaksi',['id' => $produk->id])}}" class="bg-black px-3 py-1 rounded-lg ml-3 text-sm sm:w-28 sm:h-10 sm:rounded-full sm:px-6 sm:py-[10px] lg:w-32"><span class="font-bold text-white lg:ml-2">Buy Now</span></a>
+                        @if($produk->stok > 0)
+                            <a href="{{route('transaksi',['id' => $produk->id])}}" class="bg-black px-3 py-1 rounded-lg ml-3 text-sm sm:w-28 sm:h-10 sm:rounded-full sm:px-6 sm:py-[10px] lg:w-32"><span class="font-bold text-white lg:ml-2">Buy Now</span></a>
+                        @else
+                            <button onclick="showOutOfStockAlert()" class="bg-black px-3 py-1 rounded-lg ml-3 text-sm sm:w-28 sm:h-10 sm:rounded-full sm:px-6 sm:py-[10px] lg:w-32 cursor-pointer opacity-50"><span class="font-bold text-white lg:ml-2">Buy Now</span></button>
+                        @endif
                     </div>
                 </div>
-               
                 @endforeach
             </div> 
             <hr class="mt-4">
@@ -144,10 +147,26 @@
             </div>
         </footer>
 
+        <div class="fixed inset-0  items-center justify-center bg-black bg-opacity-50 hidden" id="popup">
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-[370px]">
+                <div class="bg-gray-100 flex p-5 -mt-[32px] mb-3 -mx-8 rounded-t-lg justify-between items-center">
+                    <h2 class="font-bold text-gray-500 text-lg">Deskripsi Produk</h2>
+                    <button id="closePopup" class="w-7">
+                        <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                    </button>
+                </div>
+            <p class="text-sm font-semibold text-justify">Produk Sudah Habis}</p>
+           
+            </div>
+        </div>
+
         
     </div>
 
     <script>
+         function showOutOfStockAlert() {
+        alert("Produk sudah habis");
+    }
       // Nabar FIxed 
     window.onscroll = function(){
         const header = document.querySelector('header');

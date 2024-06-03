@@ -44,6 +44,13 @@ img{
     color: #fff;
     font-size: 17px;
 }
+.error-message{
+    color: red;
+    font-weight: bold;
+    margin-left: 3%;
+    display: block;
+    width: fit-content;
+}
 i{
     font-weight: 400px;
     font-size: 15px;

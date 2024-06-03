@@ -112,14 +112,14 @@
           </li>
           <li class="nav-item">
             <a href="{{route('paket')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fa-solid fa-dumbbell"></i>
               <p>Daftar Paket</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{route('produk')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fa-solid fa-cart-shopping"></i>
               <p>
                 Daftar Produk
               </p>
@@ -127,7 +127,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('kelolapenjualan')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fa-solid fa-money-bill-transfer"></i>
               <p>
                 Kelola Penjualan
               </p>
@@ -136,7 +136,7 @@
 
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fa-solid fa-right-from-bracket"></i>
               <p>
                 Logout
               </p>

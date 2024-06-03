@@ -34,6 +34,7 @@ Route::middleware(['guest'])->group(function(){
     
 });
 
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/shop', [HomeController::class,'shop'])->name('shop');
     Route::get('/aboutgym', [HomeController::class, 'aboutgym'])->name('aboutgym');

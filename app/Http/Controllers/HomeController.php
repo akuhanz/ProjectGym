@@ -10,6 +10,7 @@ use App\Models\transactionPaket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -89,7 +90,20 @@ class HomeController extends Controller
             'alamat'        => $request->alamat,
         ];
 
+        $idProduk = $request->idProduk;
+
+    $produk = tblproduk::where('idProduk', $idProduk)->first();
+
+    // Mengurangi stok sesuai terjual
+    $produk->stok -= $request->jumlah;  // Corrected syntax
+    $produk->save();
+    // dd($produk);
+
+    
+
         transaction::create($data);
+
+   
 
         return redirect()->route('riwayattransaction');
     }
@@ -125,3 +139,4 @@ class HomeController extends Controller
 
     
 }
+;

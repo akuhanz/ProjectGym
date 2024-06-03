@@ -269,13 +269,10 @@ class HomeAdminController extends Controller
         $data = transaction::paginate(5);
         $datap = transactionPaket::paginate(5);
 
-        if ($data->total() > 6) {
+        if ($data->total() > 0) {
             Paginator::useBootstrap();
         }
 
-        if ($datap->total() > 6) {
-            Paginator::useBootstrap();
-        }
     
         return view('penjualan.kelolapenjualan', compact('data', 'datap'));
     }

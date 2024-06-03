@@ -64,9 +64,9 @@ class LoginController extends Controller
     // Proses agar pengguna membuat Akun sebelum dia login
     public function register_proses(Request $request){
         $request->validate([
-            'name'      => 'required',
+            'name'          => 'required',
             'email'         => 'required|email|unique:users,email',
-            'password'      => 'required|min:6'
+            'password'      => 'required|min:6|confirmed',
         ]);
 
         $idUsers = Helper::IDGenerator(new User, 'idUsers', 4,'Hoyo');
@@ -86,7 +86,9 @@ class LoginController extends Controller
        if( Auth::attempt($login)){
         session(['authenticated' => true]);
             return redirect()->route('dashboard');
-       }
+       } 
+       
+
     }
 
     // Proses agar Pengguna bisa logout ketika ingin keluar dari akunnya
