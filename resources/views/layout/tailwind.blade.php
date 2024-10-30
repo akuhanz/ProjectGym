@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+      <script type="text/javascript"
+      src="https://app.stg.midtrans.com/snap/snap.js"
+      data-client-key="{{config('midtrans.client_key')}}"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    
     <title>Dashboard By rehanz</title>
 
     {{-- TailwindCSS --}}
@@ -36,45 +43,54 @@
 
 
 </head>
-<body>
-  <header class="navbar-fixed -top-1 left-0 w-full flex items-center">
-    <div class="container">
+<body class="bg-metal">
+  <header class="navbar-fixed -top-1 px-0 w-full flex items-center opacity-85 bg-metal">
+    <div class="container ">
         <div class="flex items-center justify-between relative">
-            <div class="px-4">
-                <a href="#home" class="font-bold text-lg text-primary block py-6">hanzyozakura</a>
+            <div class="px-4 flex">
+                <img src="{{ asset('storage/images/VIm.jpeg')}}" alt="" class="w-8 h-8 mt-5 mx-3 rounded-full">
+                <a href="#home" class="font-bold text-lg text-white block py-6">Vim Fitness</a>
             </div>
-            <div class="flex items-center px-4">
+            <div class="flex items-center px-4 ">
                 <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
-                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
-                    <span class="hamburger-line transition duration-300 ease-in-out"></span>
-                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+                    <span class="hamburger-line bg-white transition duration-300 ease-in-out origin-top-left"></span>
+                    <span class="hamburger-line bg-white transition duration-300 ease-in-out"></span>
+                    <span class="hamburger-line bg-white transition duration-300 ease-in-out origin-top-left"></span>
                 </button>
                 
-                <nav id="nav-menu" class="hidden absolute py-5 z-10 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
+                <nav id="nav-menu" class="hidden absolute  py-5 bg-metal  shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static  lg:max-w-full lg:shadow-none lg:rounded-none">
                     <ul class="block lg:flex ">
                         <li class="group">
-                            <a href="{{ route('dashboard') }}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex  group-hover:text-primary ">Beranda</a>
+                            <a href="{{ route('dashboard') }}" id="nav-text" class="text-base text-white lg:text-white py-2 mx-8 flex  group-hover:text-primary ">Beranda</a>
                         </li>
                         <li class="group">
-                            <a href="{{ route('riwayattransaction') }}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Transaction</a>
+                            <a href="{{ route('riwayattransactionpaket') }}" id="nav-text" class="text-base text-white lg:text-white py-2 mx-8 flex group-hover:text-primary ">Riwayat</a>
                         </li>
                         <li class="group">
-                            <a href="{{ route('shop')}}" id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">shop</a>
+                            <a href="{{ route('shop')}}" id="nav-text" class="text-base text-white lg:text-white py-2 mx-8 flex group-hover:text-primary ">Pesan</a>
                         </li>
+                        <li class="group">
+                            <a href="{{ route('blog')}}" id="nav-text" class="text-base text-white lg:text-white py-2 mx-8 flex group-hover:text-primary ">Blog</a>
+                        </li>
+                        @auth
                         @if(Auth::user()->role === 'admin')
-                        <li class="group">
-                            <a href="{{ route('dashboardadmin')}}"  id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Admin</a>
-                        </li>
+                            <li class="group">
+                                <a href="{{ route('dashboardadmin')}}"  id="nav-text" class="text-base text-dark lg:text-white py-2 mx-8 flex group-hover:text-primary ">Admin</a>
+                            </li>
                         @endif
-                        <li class="group mt-2">
-                          <a href="{{ route('logout') }}" class="py-2 px-3 mx-5 my-2 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Logout</a>
-                      </li>
+                      @endauth
+                      <li class="group mt-2">
+                          @if(session('authenticated'))
+                          <a href="{{ route('logout') }}" class="py-2 px-5 mx-5 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Keluar</a>
+                          @else
+                              <a href="{{ route('login') }}" class="py-2 px-5 mx-5 login-bottom">Masuk</a>
+                          @endif
                     </ul>
                 </nav>
             </div>
-        </div>
+        </div> 
     </div>
-</header> 
+</header>  
 
 <div class="-mt-[80px]">
 
@@ -176,6 +192,8 @@ const scrollLeftBtn = document.getElementById('scroll-left');
   });
 
 </script>
+
+     
 
 </body>
 </html>

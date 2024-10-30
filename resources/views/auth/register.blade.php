@@ -20,7 +20,7 @@
         <div class="container main">
             <div class="row">
                 <div class="col-md-6 side-image">
-                    <img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="image">
+                    <img src="{{ asset('storage/images/VIm.jpeg')}}" alt="image">
                     <div class="text">
                         <p>Selamat datang! silahkan Masuk atau daftar untuk memulai GYM anda.</p>
                     </div>
@@ -29,7 +29,7 @@
                     <form method="POST" action="{{ route('register-proses')}}">
                         @csrf
                         <div class="input-box">
-                            <header>SIGN UP</header>
+                            <header>DAFTAR</header>
                             <div class="input-field">
                                 <input type="text" class="input" name="name" value="{{ old('name') }}" id="name" required autocomplete="name">
                                 <label for="name">username</label>
@@ -56,10 +56,10 @@
                                 </span>
                             </div>
                             <div class="input-field">
-                                <input type="submit" class="submit" name="submit" value="Sign up" >
+                                <input type="submit" class="submit" name="submit" value="Daftar" >
                             </div>
                             <div class="sign-in">
-                                <span>Silahkan Kembali ke halaman <a href="{{ route('login')}}">Login</a> </span>
+                                <span>Silahkan Kembali ke halaman <a href="{{ route('login')}}">Masuk</a> </span>
                             </div>
                         </div>
                     </form>

@@ -22,15 +22,12 @@ class HomeAdminController extends Controller
         // Mengambil jumlah data dari model pertama (contoh: User)
         $jumlahPaket = tblpaket::count();
     
-        // Mengambil jumlah data dari model kedua (contoh: Post)
-        $jumlahProduk = tblproduk::count();
 
         $username = Auth::user()->name;
     
         // Meneruskan kedua variabel tersebut ke view 'dashboardadmin'
         return view('dashboardadmin', [
             'jumlahPaket' => $jumlahPaket,
-            'jumlahProduk' => $jumlahProduk,
             'username' => $username
             
         ]);
@@ -148,120 +145,6 @@ class HomeAdminController extends Controller
         return redirect()->route('paket');
     }
 
-    // Membuat admin menuju kehalaman kumpulan data Produk yang sudah ia bikin
-    public function produk(){
-
-        $data = tblproduk::get();
-
-        return view('produk.produk', compact('data'));
-    }
-
-    // Membuat admin menuju halaman untuk membuat/mengisi Produk yang dia ingin kan
-    public function produkC(){
-        return view('produk.create');
-    }
-
-    //Proses untuk mengirim data Produk yang telah ia buat menuju database
-    public function produkstore(Request $request){
-        $validator = Validator::make($request->all(),[
-            'gambar'            => 'required|mimes:png,jpg,jpeg|max:2048',
-            'stok'              => 'required',
-            'nameproduk'        => 'required',
-            'deskripsiproduk'   => 'required',
-            'harga'             => 'required',
-            
-        ]);
-
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-
-        // Simpan gambar di direktori public/images
-    $photo      = $request->file('gambar');
-    $filename   = date('y-m-d'). $photo->getClientOriginalName();
-    $path       = 'produk/'. $filename;
-
-
-    Storage::disk('public')->put($path,file_get_contents($photo));
-
-    $idProduk =Helper::IDGenerator(new tblproduk, 'idProduk', 3, 'PRX');
-
-    // Buat data untuk disimpan ke database
-    $data = [
-        'idProduk'          => $idProduk,
-        'nameproduk'        => $request->nameproduk,
-        'stok'              => $request->stok,
-        'deskripsiproduk'   => $request->deskripsiproduk,
-        'harga'             => $request->harga,
-        'gambar'            => $filename, // Simpan jalur gambar ke database
-    ];
-
-        tblproduk::create($data);
-
-        return redirect()->route('produk');
-    }
-
-    // Membuat admin menuju halaman untuk mengedit/mengubah isi data Produk nya
-    public function produkedit(Request $request, $id){
-        $data = tblproduk::find($id);
-
-        return view('produk.edit', compact('data'));
-    }
-
-    //Proses untuk mengganti data Produk yang lama dengan data Produk yang baru ia edit
-    public function updateproduk(Request $request, $id){
-        $validator = Validator::make($request->all(),[
-            'nameproduk'                    => 'required',
-            'stok'                          => 'required',
-            'deskripsiproduk'               => 'required',
-            'harga'                         => 'required',
-            'gambar'                        => 'nullable|mimes:png,jpg,jpeg|max:2048',
-        ]);
-
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        $find = tblproduk::find($id);
-
-        $data['nameproduk']         = $request->nameproduk;
-        $data['stok']               = $request->stok;
-        $data['deskripsiproduk']    = $request->deskripsiproduk;
-        $data['harga']              = $request->harga;
-        $data['gambar']             = $request->gambar;
-
-        $photo  = $request->file('gambar');
-
-        if($photo){
-            $filename   = date('y-m-d').$photo->getClientOriginalName();
-            $path       = 'produk/'.$filename;
-
-            if($find->gambar){
-                Storage::disk('public')->delete('produk/'. $find->gambar);
-            }
-
-            Storage::disk('public')->put($path,file_get_contents($photo));
-
-            $data['gambar']  = $filename;
-        }else {
-            $imageDb = tblproduk::findOrFail($id);
-            $data['gambar'] = $imageDb->gambar;
-        }
-
-
-        tblproduk::whereId($id)->update($data);
-
-        return redirect()->route('produk');
-    
-    }
-
-     // untuk Menghapus data Produk yang sesuai dengan Admin Pilih
-    public function produkdelete(Request $request, $id){
-        $data = tblproduk::find($id);
-
-        if($data){
-            $data->delete();
-        }
-
-        return redirect()->route('produk');
-    }
 
     // Membuat Admin menuju kehalaman menampilakan Riwayat Transaksi yang telah para User lakukan
     public function kelolapenjualan(){
@@ -277,6 +160,9 @@ class HomeAdminController extends Controller
         return view('penjualan.kelolapenjualan', compact('data', 'datap'));
     }
     
+    public function blogger(){
+        return view('Blogger.kelolablogger');
+    }
 
 }
 

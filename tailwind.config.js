@@ -15,6 +15,10 @@ export default {
       primary: '#8b5cf6',
       secondary: '#64748b',
       dark: '#0f172a',
+      metalTerang: '#3f4041',
+      metal: '#282929',
+      buy: '#2f4f4f',
+      hoverFooter: '#B17457',
       },
       keyframes: {
         fadeIn: {

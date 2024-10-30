@@ -1,5 +1,7 @@
+body{
+    background-color: #282929 ;
+}
 .wrapper{
-    background: #ececec ;
     padding: 0 20px 0 20px;
 }
 .main{
@@ -16,12 +18,12 @@
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 .side-image{
-    background-image: url('https://i.pinimg.com/564x/af/b7/40/afb7406bbfc0e4d82412637954a0ee45.jpg');
+    background-image: url('/storage/Asset/AssetLogin.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    border-radius: 0 10px 10px 0;
+    border-radius: 10px 0 01 10px;
 }
 img{
     border-radius: 50%;

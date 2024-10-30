@@ -91,8 +91,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('dashboardadmin')}}" class="brand-link">
-      <img src="https://cdn-sdotid.adg.id/images/37d92b52-78e4-465f-87d2-4cac0f9476af_564x564.webp.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Dewa GYM</span>
+      <img src="{{ asset('storage/images/VIm.jpeg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Vim Fitness</span>
     </a>
 
     <!-- Sidebar -->
@@ -116,20 +116,19 @@
               <p>Daftar Paket</p>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a href="{{route('produk')}}" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <p>
-                Daftar Produk
-              </p>
-            </a>
-          </li>
           <li class="nav-item">
             <a href="{{route('kelolapenjualan')}}" class="nav-link">
               <i class="fa-solid fa-money-bill-transfer"></i>
               <p>
                 Kelola Penjualan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('blogger')}}" class="nav-link">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <p>
+                Kelola Blogger
               </p>
             </a>
           </li>

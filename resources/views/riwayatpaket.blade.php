@@ -3,96 +3,85 @@
 
 
 
-        <img src="https://images.unsplash.com/photo-1708287532430-c37b650b39c3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="w-full sm:h-[400px] sm:object-cover">
+        <img src="{{ asset('storage/images/wallpaper.jpg')}}" alt="" class="w-full sm:h-[400px] sm:object-cover">
         
        
         <div id="produk" class="container relative  w-full -my-7 sm:-my-14">
-            <div class="px-4 py-4 bg-white rounded-t-lg">
+            <div class="px-4 py-4 bg-metalTerang rounded-xl ">
                 <div class="flex mb-2 justify-between">
-                    <h1 class="font-bold text-sm sm:text-2xl">History Transaction Paket</h1>
-                    <a href="{{ route('riwayattransaction')}}" class="inline-block -mt-1 px-2 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm xl:text-lg xl:px-6 xl:py-2 xl:rounded-xl">Produk</a>
+                    <h1 class="font-bold text-white text-sm sm:text-2xl mx-5">Riwayat Transaksi</h1>
                 </div>
 
+                
+                <div class="container mx-auto">
+                    <div class="overflow-y-auto max-h-80 rounded-lg scrollbar-hidden">
+                        <table class="min-w-full bg-white border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 rounded-t-lg bg-gray-100">Tanggal</th>
+                                    <th class="px-6 py-3 bg-gray-100">Pengeluaran</th>
+                                    <th class="px-6 py-3 bg-gray-100">Aktivitas</th>
+                                    <th class="px-6 py-3 bg-gray-100">Nama</th>
+                                    <th class="px-6 py-3 rounded-t-lg bg-gray-100">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @foreach ($transactionPaket as $paket)
+                                <tr>
+                                    <td class="px-6 py-2 border-b border-gray-300">{{ $paket->created_at }}</td>
+                                    <td class="px-6 py-2 border-b border-gray-300">-{{ $paket->harga }}</td>
+                                    <td class="px-6 py-2 border-b border-gray-300">membeli paket {{ $paket->Paket }}</td>
+                                    <td class="px-6 py-2 border-b border-gray-300">
+                                        <div class="flex justify-center items-center">
+                                            <img src="{{ asset('storage/profile/ProfileContoh.jpg') }}" alt="" class="rounded-full w-9 h-9">
+                                            <h1 class="ml-2">{{ Auth::user()->name }}</h1>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-2 border-b border-gray-300">
+                                        @if ($paket->status === 'dibayar')
+                                        <div class="bg-green-700 rounded-full shadow">
+                                            <h1 class="text-white text-center">Berhasil</h1>
+                                        </div>
+                                        @else
+                                        <div class="bg-red-700 rounded-full shadow">
+                                            <h1 class="text-white text-center">Belum Dibayar</h1>
+                                        </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                   
+                
+                
+                
 
-            {{-- History Pembelian Paket --}}
-                @if(!empty($transactionPaket) && count($transactionPaket) > 0)
-                <div class="xl:flex xl:flex-wrap xl:ml-8">
-                @foreach ($transactionPaket as $paket)
-                <div class="xl:mx-7 xl:my-5">
-                    <button class="cursor-pointer open-popup" type="button" 
-                            data-id="{{ $paket->idTransaksi }}"
-                            data-nama="{{ $paket->Paket }}"
-                            data-harga="{{ $paket->harga }}"
-                            data-tanggal="{{ $paket->created_at }}"
-                            data-gambar="{{ asset('storage/images/'.$paket->gambar) }}"
-                            data-metode="{{ $paket->metode }}"
-                            id="openPopup" class="md:mx-auto">
-                    <div class="w-full xl:bg-zinc-200 xl:rounded-2xl xl:shadow-md xl:max-h-[110px] xl:w-[650px] xl:p-5">
-                        <div class="w-full mb-2 flex items-center">
-                        <img src="{{ asset('storage/images/'.$paket->gambar) }}" alt="" class="w-16 h-16 rounded-xl object-cover md:w-32 md:h-32 xl:h-20 xl:w-20 xl:object-cover xl:rounded-full">
-                        <div class="mx-3 w-32 md:6 md:w-96 ">
-                            <h2 class="font-bold text-sm font-sans xl:text-lg">{{ $paket->Paket}}</h2>
-                            <p class="font-semibold text-xs text-slate-500 xl:text-base">{{ $paket->created_at}}</p>
-                        </div>
-                        <div class="mx-5">
-                            <h1 class="font-bold text-base xl:text-lg">{{ $paket->harga}}</h1>
-                        </div>
-                        </div>
-                        <hr class="my-4 xl:hidden">
-                    </div>
-                    </button>
-
-                <!-- Popup Container -->
-                <div class="fixed inset-0 bg-black bg-opacity-50 items-end justify-center hidden z-[999999]" id="popupOverlay">
-                    <div class="bg-white w-full max-w-md mx-auto p-8 rounded-t-3xl shadow-lg transform transition-transform popup-enter md:max-w-xl md:" id="popup">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="font-bold text-gray-500 text-lg">Transaction Details</h2>
-                        <button id="closePopup" class="text-gray-500 hover:text-gray-700">
-                        <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon" class="w-6 h-6">
-                            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                        </svg>
-                        </button>
-                    </div>
-                    <div class="flex items-center mb-6">
-                        <img id="popupImage" src="" alt="" class="rounded-full w-16">
-                        <div class="ml-3">
-                        <h2 id="popupName" class="font-bold text-lg font-sans"></h2>
-                        <p id="popupDate" class="font-semibold text-sm text-slate-500"></p>
-                        </div>
-                        <div class="ml-auto flex items-center">
-                        <h1 id="popupPrice" class="font-bold text-base"></h1>
-                        </div>
-                    </div>
-                    <button class="w-full px-10 py-4 bg-gray-800 rounded-full text-white">Download Confirmation</button>
-                    <hr class="w-full mt-4">
-                    <div class="py-4">
-                        <p>Transaction ID</p>
-                        <h1 id="popupId"></h1>
-                    </div>
-                    <div class="py-4">
-                        <p>Metode Transaction</p>
-                        <h1 id="popupMethod"></h1>
-                    </div>
-                    <div class="py-4">
-                        <p>Contact</p>
-                        <h1>{{ Auth::user()->email }}</h1>
-                        <h1>{{ $paket->number }}</h1>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                @endforeach
-                </div>
-                <div class="flex justify-center mt-2">
-                {{ $transactionPaket->links() }}
-                </div>
-                @else
-                <h1>Anda belum melakukan transaksi</h1>
-                @endif               
             </div>
 
         </div>
         
+        <style>
+            .scrollbar-hidden::-webkit-scrollbar {
+                display: none; /* Safari and Chrome */
+            }
+            
+            .scrollbar-hidden {
+                -ms-overflow-style: none;  /* Internet Explorer and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+            table {
+                border-collapse: collapse;
+            }
+
+            thead th {
+                position: sticky;
+                top: 0;
+                z-index: 10; /* Ensure the header stays above other content */
+            }
+            </style>
 
        
 

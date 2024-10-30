@@ -1,8 +1,10 @@
 *{
     font-family: 'Poppins',' sans-serif';
 }
+body{
+    background: #282929 ;
+}
 .wrapper{
-    background: #ececec ;
     padding: 0 20px 0 20px;
 }
 .main{
@@ -19,7 +21,7 @@
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 .side-image{
-    background-image: url('https://i.pinimg.com/564x/c7/85/e3/c785e30e9c346c022082b06967b9ad57.jpg');
+    background-image: url('/storage/Asset/AssetLogin.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

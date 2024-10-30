@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard By rehanz</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Design Journal</title>
+   {{-- TailwindCSS --}}
+   @vite('resources/css/app.css')
 
-    {{-- TailwindCSS --}}
-    @vite('resources/css/app.css')
-
-
-    <style>
-        /* Untuk membuat tombol scroll ke kiri dan kanan */
-        
-        .scroll-btn-responsive{
-            width: 20px;
-            height: 20px;
-            border-radius: 100%;
-            cursor: pointer
-        }
-
-        .scroll-btn:focus {
-        outline: none;
-        }
-    </style>
-
-
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
 </head>
-<body class=" bg-metal">
-    <header class="navbar-fixed -top-1 px-0 w-full flex items-center opacity-85 bg-metal">
+<body class="bg-metal">
+    <header class=" -top-1 px-0 w-full flex items-center bg-metalTerang shadow-black shadow-sm">
         <div class="container ">
             <div class="flex items-center justify-between relative">
                 <div class="px-4 flex">
@@ -43,7 +25,7 @@
                         <span class="hamburger-line bg-white transition duration-300 ease-in-out origin-top-left"></span>
                     </button>
                     
-                    <nav id="nav-menu" class="hidden absolute  py-5 bg-metal  shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static  lg:max-w-full lg:shadow-none lg:rounded-none">
+                    <nav id="nav-menu" class="hidden absolute  py-5  shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static  lg:max-w-full lg:shadow-none lg:rounded-none">
                         <ul class="block lg:flex ">
                             <li class="group">
                                 <a href="{{ route('dashboard') }}" id="nav-text" class="text-base text-white lg:text-white py-2 mx-8 flex  group-hover:text-primary ">Beranda</a>
@@ -68,7 +50,7 @@
                               @if(session('authenticated'))
                               <a href="{{ route('logout') }}" class="py-2 px-5 mx-5 bg-red-700 rounded-full text-white hover:bg-opacity-70 ease-in-out duration-300">Keluar</a>
                               @else
-                                  <a href="{{ route('login') }}" class="py-2 px-5 mx-5 login-bottom">Masuk</a>
+                                  <a href="{{ route('login') }}" class="py-2 px-5 mx-5 bg-green-500 rounded-full bg-opacity-75 text-white">Masuk</a>
                               @endif
                         </ul>
                     </nav>
@@ -77,55 +59,77 @@
         </div>
     </header>  
 
-    <div class=" w-auto mb-20">
-        <img src="{{ asset('storage/images/wallpaper.jpg')}}" alt="" class="w-full sm:h-[400px] sm:object-cover shadow-md">
-            <div id="produk" class="container w-auto mx-14 md:-my-14 bg-metalTerang px-0 rounded-lg">
-                <div class="px-4 py-4 bg-metalTerang rounded-lg relative">
-                    <h1 class="font-bold text-xl text-white mb-4 md:text-2xl">MARI MEMULAI HIDUP SEHAT</h1>
-                    <hr class="mt-4">
+<main class="container mx-auto px-4 py-8">
+    <section class="mb-8 mx-auto">
+        <div class="relative overflow-hidden rounded-lg shadow-black shadow-sm">
+            <img alt="A woman holding a paper and looking at it thoughtfully in a bright room with plants and an easel" class="w-screen rounded-lg h-auto max-h-[650px] object-cover object-center" src="{{ asset('storage/Asset/PictVim.jpg') }}"/>
+                <div class="absolute bottom-0 left-0 right-0 rounded-lg bg-metal bg-opacity-35 backdrop-blur-[11px] border border-white border-opacity-20 shadow-metal shadow-sm  text-white p-6 m-[20px]">
+                    <h2 class="text-lg font-semibold">Featured</h2>
+                    <h1 class="text-2xl font-bold max-w-[80%]">Switching From Photography to UX Design: Everything You Need to Know With Viola LeBlanc</h1>
+                    <p class="mt-2 max-w-[75%]">Viola LeBlanc is a 23-year-old photographer and product designer from Toronto, Ontario. She has worked with Spotify, Niko, Chews, Makr, and Square. Sophia Munn asked her a few questions about her work.</p>
                 </div>
+        </div>
+    </section>
 
-      
-                <div class="flex justify-center items-center">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10 text-white">
-                        <!-- Product Cards -->
-                        @foreach ($datap as $paket)
-                        <div class="bg-white p-2 rounded-lg w-72 bg-opacity-10 backdrop-blur px-3">
-                            <img src="{{ asset('storage/images/'.$paket->gambar) }}" alt="Aerospace Ball" class="w-full h-48 object-cover rounded-lg mb-2"/>
-                            <h2 class="text-lg font-bold mb-1">{{$paket->Paket}}</h2>
-                            <p class="mb-3 text-sm truncate">{{$paket->deskripsipaket}}</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm font-bold">{{$paket->harga}}</span>
-                                <a href="{{route('transaksi',['id' => $paket->id])}}" class=" bg-buy  px-2 py-1 rounded-full flex items-center"><span class="font-bold text-white ">Pesan Sekarang   <i class="fas fa-arrow-right ml-1 mt-1"></i></span></a>
-                            </div>
-                        
+    <section class="mb-8">
+        <div class="flex justify-between items-center my-5 mx-2">
+            <h2 class="text-xl font-bold text-white">Postingan Terbaru</h2>
+            <div class="bg-blue-300 py-2 px-4 rounded-md bg-opacity-35 ">
+                <a class="text-blue-400 font-bold hover:text-blue-600" href="#">Lihat Semua Postingan</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article class="bg-white bg-opacity-10 backdrop-blur rounded-lg shadow">
+                <img alt="A woman in a white top looking to the side" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/TbpEdTYOrn72ON0CDoiefQ9mAX1w1L7eKg4Z0gUPkzTkSYHnA.jpg" width="400"/>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-white">How Remote Collaboration Makes Us Better Product Designers</h3>
+                    <p class="text-sm text-gray-200">Collaboration can make our teams stronger, and our individual designs better. Remote work has made new challenges to remote collaboration, but thankfully...</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-100">
+                        <div class="mx-2">
+                            <img src="{{ asset('storage/profile/ProfileContoh.jpg') }}" alt="" class="w-8 h-8 rounded-full">
                         </div>
-                        @endforeach
-                        
+                        <span class="mr-2">Steven Kurniawan</span>
+                        <span>• 18 Jan 2024</span>
                     </div>
                 </div>
-
-
-                <div class="fixed inset-0  items-center justify-center bg-black bg-opacity-50 hidden" id="popup">
-                    <div class="bg-white p-8 rounded-lg shadow-lg max-w-[370px]">
-                        <div class="bg-gray-100 flex p-5 -mt-[32px] mb-3 -mx-8 rounded-t-lg justify-between items-center">
-                            <h2 class="font-bold text-gray-500 text-lg">Deskripsi Produk</h2>
-                            <button id="closePopup" class="w-7">
-                                <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                            </button>
+            </article>
+            <article class="bg-white bg-opacity-10 backdrop-blur rounded-lg shadow">
+                <img alt="A woman in a white top looking to the side" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/LyjZWqkCCNrLAVTTJ1437o2DfX6JVgJ3qTeadN4vPC4VJsjTA.jpg" width="400"/>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-white">Best Books on Scaling Your Early-Stage Startup</h3>
+                    <p class="text-sm text-gray-200">This collection of the best startup books for scaling your startup are packed full with valuable and actionable advice to take your business to the next level!</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-100">
+                        <div class="mx-2">
+                            <img src="{{ asset('storage/profile/ProfileContoh2.jpg') }}" alt="" class="w-8 h-8 rounded-full">
                         </div>
-                    <p class="text-sm font-semibold text-justify">Produk Sudah Habis</p>
-                
+                        <span class="mr-2">Ade Setiawan</span>
+                        <span>• 14 Jan 2024</span>
                     </div>
                 </div>
-            </div>  
-            
-            
-        
-    </div>
+            </article>
+            <article class="bg-white bg-opacity-10 backdrop-blur rounded-lg shadow">
+                <img alt="A variety of fresh fruits and vegetables on a table" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/5XoOFleMlQVSSSJfcHeIUYtDiu2tCWe6yx22UN0qE4sElwOOB.jpg" width="400"/>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-white">Why Food Matters — Disease Prevention & Treatment</h3>
+                    <p class="text-sm text-gray-200">Eating more plants and less meat has been tied to a longer life and a reduced risk of cardiovascular disease. A new study, with a 16% lower risk of cardiovascular disease...</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-100">
+                        <div class="mx-2">
+                            <img src="{{ asset('storage/profile/ProfileContoh3.jpg') }}" alt="" class="w-8 h-8 rounded-full">
+                        </div>
+                        <span class="mr-2">DeanKT</span>
+                        <span>• 9 Jan 2024</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="mt-8 text-center">
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-800">Loading more...</button>
+        </div>
+    </section>
+</main>
 
-      <!-- Footer -->
-      <footer class="bg-metalTerang text-white py-8">
+     <!-- Footer -->
+     <footer class="bg-metalTerang text-white py-8">
         <div class="container mx-auto px-14">
             <div class="flex flex-wrap justify-between">
                 <!-- Bagian Kontak -->
@@ -191,55 +195,3 @@
             </div>
         </div>
     </footer>
-    
-
-    <script>
-         function showOutOfStockAlert() {
-        alert("Produk sudah habis");
-    }
-      // Nabar FIxed 
-    window.onscroll = function(){
-        const header = document.querySelector('header');
-        const fixedNav = header.offsetTop;
-    
-        if(window.pageYOffset > fixedNav) {
-            header.classList.add('navbar-fixed');         
-        }else {
-            header.classList.remove('navbar-fixed');
-        }
-    }
-    
-    
-    //hamburger
-    const hamburger = document.querySelector('#hamburger');
-    const navMenu = document.querySelector('#nav-menu');
-    
-    hamburger.addEventListener('click', function(){
-        hamburger.classList.toggle('hamburger-active');
-        navMenu.classList.toggle('hidden');
-    });
-    
-    // click diluar hamburger
-    window.addEventListener('click', function(e){
-        if(e.target != hamburger && e.target != navMenu){
-            hamburger.classList.remove('hamburger-active');
-            navMenu.classList.add('hidden');
-        }
-    });
-    
-    // const scrollLeftBtn = document.getElementById('scroll-left');
-    //   const scrollRightBtn = document.getElementById('scroll-right');
-    //   const container = document.querySelector('.overflow-x-auto');
-    
-    //   scrollLeftBtn.addEventListener('click', () => {
-    //     container.scrollLeft -= 100; // Ubah angka ini untuk mengatur kecepatan scroll
-    //   });
-    
-    //   scrollRightBtn.addEventListener('click', () => {
-    //     container.scrollLeft += 100; // Ubah angka ini untuk mengatur kecepatan scroll
-    //   });
-    
-    </script>
-    
-    </body>
-    </html>

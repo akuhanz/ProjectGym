@@ -24,4 +24,10 @@ class tblpaket extends Model
         'harga',
         'gambar'
     ];
+
+    public function getHargaAttribute($value)
+    {
+        // Format harga dengan pemisah ribuan dan mata uang Rupiah
+        return 'Rp ' . number_format($value, 0, ',', '.');
+    }
 }
